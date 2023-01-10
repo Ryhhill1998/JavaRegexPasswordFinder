@@ -29,7 +29,7 @@ public class Main {
             StringBuilder password = new StringBuilder();
 
             while (passwordStartIndex < text.length()) {
-                String stringCharacter = "" + text.charAt(passwordStartIndex);
+                String stringCharacter = String.valueOf(text.charAt(passwordStartIndex));
                 Matcher passwordCharactersMatcher = passwordCharactersPattern.matcher(stringCharacter);
                 if (passwordCharactersMatcher.matches()) {
                     password.append(text.charAt(passwordStartIndex));
@@ -45,7 +45,5 @@ public class Main {
         if (matchCount == 0) {
             System.out.println("No passwords found.");
         }
-
-        System.out.println(matchCount);
     }
 }
