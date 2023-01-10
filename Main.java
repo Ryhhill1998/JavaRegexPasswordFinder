@@ -19,7 +19,7 @@ public class Main {
             int passwordStartIndex = passwordDeclarationMatcher.end();
             StringBuilder password = new StringBuilder();
 
-            while (true) {
+            while (passwordStartIndex < text.length()) {
                 Matcher passwordCharactersMatcher = passwordCharactersPattern.matcher("" + text.charAt(passwordStartIndex));
                 if (passwordCharactersMatcher.matches()) {
                     password.append(text.charAt(passwordStartIndex));
