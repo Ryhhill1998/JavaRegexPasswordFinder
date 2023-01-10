@@ -9,7 +9,8 @@ public class Main {
 
         String text = scanner.nextLine();
 
-        Pattern passwordDeclarationPattern = Pattern.compile("(?i)(password):?\\s*");
+        String regex = "password:?\\s*";
+        Pattern passwordDeclarationPattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher passwordDeclarationMatcher = passwordDeclarationPattern.matcher(text);
 
         Pattern passwordCharactersPattern = Pattern.compile("[a-zA-Z\\d]");
