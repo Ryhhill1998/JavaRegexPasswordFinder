@@ -17,9 +17,12 @@ public class Main {
         ArrayList<Integer> passwordsStartIndices = new ArrayList<>();
 
         while (passwordDeclarationMatcher.find()) {
-            if (!passwordsStartIndices.isEmpty()
-                    && passwordDeclarationMatcher.start() == passwordsStartIndices.get(passwordsStartIndices.size() - 1)) {
-                continue;
+            if (!passwordsStartIndices.isEmpty()) {
+                int matchStartIndex = passwordDeclarationMatcher.start();
+                int lastPasswordStartIndex = passwordsStartIndices.get(passwordsStartIndices.size() - 1);
+                if (matchStartIndex == lastPasswordStartIndex) {
+                    continue;
+                }
             }
 
             matchCount++;
