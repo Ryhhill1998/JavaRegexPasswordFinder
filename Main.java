@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,14 +14,23 @@ public class Main {
 
         Pattern passwordCharactersPattern = Pattern.compile("[a-zA-Z\\d]");
         int matchCount = 0;
+        ArrayList<Integer> passwordsStartIndices = new ArrayList<>();
 
         while (passwordDeclarationMatcher.find()) {
+            if (!passwordsStartIndices.isEmpty()
+                    && passwordDeclarationMatcher.start() == passwordsStartIndices.get(passwordsStartIndices.size() - 1)) {
+                continue;
+            }
+
             matchCount++;
             int passwordStartIndex = passwordDeclarationMatcher.end();
+            passwordsStartIndices.add(passwordStartIndex);
+
             StringBuilder password = new StringBuilder();
 
             while (passwordStartIndex < text.length()) {
-                Matcher passwordCharactersMatcher = passwordCharactersPattern.matcher("" + text.charAt(passwordStartIndex));
+                String stringCharacter = "" + text.charAt(passwordStartIndex);
+                Matcher passwordCharactersMatcher = passwordCharactersPattern.matcher(stringCharacter);
                 if (passwordCharactersMatcher.matches()) {
                     password.append(text.charAt(passwordStartIndex));
                     passwordStartIndex++;
@@ -35,5 +45,7 @@ public class Main {
         if (matchCount == 0) {
             System.out.println("No passwords found.");
         }
+
+        System.out.println(matchCount);
     }
 }
